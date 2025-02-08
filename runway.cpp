@@ -6,7 +6,7 @@
 
 namespace {
     void assertNumber(std::string_view str) {
-        bool all_digits = !str.empty() && std::all_of(str.begin(), str.end(), [](char ch) {
+        const bool all_digits = !str.empty() && std::ranges::all_of(str, [](const char ch) {
             return std::isdigit(ch);
         });
         if (!all_digits) {
@@ -15,7 +15,7 @@ namespace {
     }
 }
 
-char runway::transform_runway_suffix_to_opposite_direction(char suffix) {
+char runway::transform_runway_suffix_to_opposite_direction(const char suffix) {
     switch (suffix) {
         case 'R':
             return 'L';
