@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 namespace {
-    void assertNumber(const std::string &str) {
+    void assertNumber(std::string_view str) {
         bool all_digits = !str.empty() && std::all_of(str.begin(), str.end(), [](char ch) {
             return std::isdigit(ch);
         });
@@ -28,9 +28,9 @@ char runway::transform_runway_suffix_to_opposite_direction(char suffix) {
     }
 }
 
-std::string runway::transform_number_to_opposite_direction(const std::string &number) {
+std::string runway::transform_number_to_opposite_direction(std::string_view number) {
     assertNumber(number);
-    int number_as_int = std::stoi(number);
+    int number_as_int = std::stoi(number.data());
     if (number_as_int <= 0 || number_as_int > 36) {
         throw std::runtime_error("Invalid runway number");
     }
@@ -45,7 +45,7 @@ std::string runway::transform_number_to_opposite_direction(const std::string &nu
     return std::to_string(opposite_number);
 }
 
-std::string runway::transform_runway_identifier_to_opposite_direction(const std::string &runway_identifier) {
+std::string runway::transform_runway_identifier_to_opposite_direction(std::string_view runway_identifier) {
     if (runway_identifier.size() < 2 || runway_identifier.size() > 3) {
         throw std::runtime_error("Invalid runway identifier");
     }
